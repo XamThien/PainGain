@@ -73,6 +73,9 @@
                     <li><a href="${pageContext.request.contextPath}/tinhluong.jsp"><i class="fa fa-circle-o"></i>Tính
                             lương</a></li>
                 </ul></li>
+            <li><a href="${pageContext.request.contextPath}/calam.jsp"> <i
+                        class="fa fa-dashboard"></i> <span>Ca làm</span>
+                </a></li>
             <li><a href="${pageContext.request.contextPath}/chamcong.jsp"> <i
                         class="fa fa-dashboard"></i> <span>Chấm công</span>
                 </a></li>

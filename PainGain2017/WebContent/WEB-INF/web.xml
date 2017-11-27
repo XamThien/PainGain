@@ -41,6 +41,15 @@
     <servlet-name>ActionNcc</servlet-name>
     <url-pattern>/actionncc</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ActionCalam</servlet-name>
+    <servlet-class>controller.ActionCalam</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActionCalam</servlet-name>
+    <url-pattern>/actioncalam</url-pattern>
+  </servlet-mapping>
+  
   <filter>
     <filter-name>loginFilter</filter-name>
     <filter-class>paingainshop.filter.loginFilter</filter-class>
@@ -53,5 +62,6 @@
     <url-pattern>/chamcong.jsp</url-pattern>
     <url-pattern>/nhacc.jsp</url-pattern>
     <url-pattern>/thuongphat.jsp</url-pattern>
+    <url-pattern>/calam.jsp</url-pattern>
   </filter-mapping>
 </web-app>

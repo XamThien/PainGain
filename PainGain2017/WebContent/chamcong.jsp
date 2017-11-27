@@ -168,7 +168,7 @@
                 		for (CaLam cl : lst)
                 		{
                     %>
-						<option value="<%=cl.getMaCa() %>">Ca <%=cl.getMaCa() %></option>
+						<option value="<%=cl.getMaCa() %>">Ca <%=cl.getMaCa() %> : <%=cl.getGioBatDau() %> - <%=cl.getGioKetThuc() %></option>
 					<%}} %>
 					</select>
                   </div>

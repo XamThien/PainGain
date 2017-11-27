@@ -101,31 +101,8 @@ public class CaLamDAO {
 	 
 	 //test database
 	public static void main(String[] args) throws Exception{
-		System.out.println("Nhấn 1 để chọn chức năng lấy ds sp");
-		System.out.println("Nhấn 5 để xóa sp");
-		
-		System.out.print("Chọn chức năng : ");
-		Scanner sc = new Scanner(System.in);
-		int ck = sc.nextInt() ;
-		switch(ck)
-		{
-		case 1 :
-			List<CaLam> listt = new ArrayList<CaLam>();
-					listt = new  CaLamDAO().getAllCaLam();
-			for (CaLam sp1 : listt)
-			{
-				System.out.println(sp1.getGioBatDau());
-				System.out.println(sp1.getGioKetThuc());
-			}
-			break;
-		
-		case 5 :
-			new CaLamDAO().deleteCaLam(1);
-			System.out.println("Thành công");
-			break;
-		default : 
-			break;
-		}
+		CaLam cl = new CaLam("8:00:00","12:00:00",12000);
+		new CaLamDAO().updateCaLam(1, cl);
 		
 			
 	}
