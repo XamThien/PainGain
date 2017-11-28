@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">root</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/PainAndGain_2017</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <mapping class ="model.CaLam"></mapping>
+  <mapping class ="model.ChamCong"></mapping>
+  <mapping class ="model.ChiTietHoaDon"></mapping>
+  <mapping class ="model.ChiTietPhieuNhap"></mapping>
+  <mapping class ="model.SanPham"></mapping>
+  <mapping class ="model.DanhMuc"></mapping>
+  <mapping class ="model.HoaDon"></mapping>
+  <mapping class ="model.KhachHang"></mapping>
+  <mapping class ="model.LoaiSp"></mapping>
+  <mapping class ="model.NhaCc"></mapping>
+  <mapping class ="model.NhaccSanpham"></mapping>
+  <mapping class ="model.NhanVien"></mapping>
+  <mapping class ="model.PhieuNhap"></mapping>
+  <mapping class ="model.ThuongPhat"></mapping>
+  <mapping class ="model.Account"></mapping>
+  
+ </session-factory>
+</hibernate-configuration>
