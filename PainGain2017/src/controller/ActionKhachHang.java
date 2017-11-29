@@ -34,6 +34,7 @@ public class ActionKhachHang extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
     	response.setCharacterEncoding("utf-8");
+    	
 		int MaKH = Integer.parseInt(request.getParameter("MaKH"));
 		NhanVienDAO db = new NhanVienDAO();
 		String message ="";
@@ -61,47 +62,93 @@ public class ActionKhachHang extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
     	response.setCharacterEncoding("utf-8");
-		
+    	String action = request.getParameter("action");
 		KhachHangDAO db = new KhachHangDAO();
 		
 		String message ="";
-		try
+		switch(action)
 		{
-			int idd = Integer.parseInt(request.getParameter("ID"));
-			String name = request.getParameter("Tennv");
-			
-			String pass = request.getParameter("Password");
-			
-			String dc = request.getParameter("Diachi");
-			//String ngayvl = request.getParameter("Date");
-			
-			
-            
-			KhachHang kh = new KhachHang(name,pass,dc);
-            try
-            {
-            	db.updateKhachHang(idd, kh);
-            	
-            	message = "Sửa Khách hàng thành công.";
-            	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
-				request.setAttribute("msg1", message );
-				xxx.forward(request, response);
-            	
-            }
-            catch(Exception e)
+		case "edit":
+			try
 			{
-            	message = "Sửa Khách hàng không thành công 1.";
-            	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+				int idd = Integer.parseInt(request.getParameter("ID"));
+				String name = request.getParameter("Tennv");
+				
+				String pass = request.getParameter("Password");
+				
+				String dc = request.getParameter("Diachi");
+				//String ngayvl = request.getParameter("Date");
+				
+				
+	            
+				KhachHang kh = new KhachHang(name,pass,dc);
+	            try
+	            {
+	            	db.updateKhachHang(idd, kh);
+	            	
+	            	message = "Sửa Khách hàng thành công.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+	            	
+	            }
+	            catch(Exception e)
+				{
+	            	message = "Sửa Khách hàng không thành công 1.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+				}
+			}
+			catch(Exception e)
+			{
+				message = "Sửa Khách hàng không thành công 2.";
+	        	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
 				request.setAttribute("msg1", message );
 				xxx.forward(request, response);
 			}
-		}
-		catch(Exception e)
-		{
-			message = "Sửa Khách hàng không thành công 2.";
-        	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
-			request.setAttribute("msg1", message );
-			xxx.forward(request, response);
+			break;
+		case "add":
+			try
+			{
+				String name = request.getParameter("Tennv");
+				
+				String pass = request.getParameter("Password");
+				
+				String dc = request.getParameter("Diachi");
+				//String ngayvl = request.getParameter("Date");
+				
+				
+	            
+				KhachHang kh = new KhachHang(name,pass,dc);
+	            try
+	            {
+	            	db.insertKhachHang(kh);
+	            	
+	            	message = "Thêm Khách hàng thành công.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+	            	
+	            }
+	            catch(Exception e)
+				{
+	            	message = "Thêm Khách hàng không thành công 1.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+				}
+			}
+			catch(Exception e)
+			{
+				message = "Thêm Khách hàng không thành công 2.";
+	        	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+				request.setAttribute("msg1", message );
+				xxx.forward(request, response);
+			}
+			break;
+		default:
+			break;	
 		}
 	}
 

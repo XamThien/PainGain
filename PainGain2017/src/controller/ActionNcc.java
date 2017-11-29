@@ -63,47 +63,93 @@ public class ActionNcc extends HttpServlet {
     	response.setCharacterEncoding("utf-8");
 		
     	NhaCcDAO db = new NhaCcDAO();
-		
+		String action = request.getParameter("action");
 		String message ="";
-		try
+		switch(action)
 		{
-			int idd = Integer.parseInt(request.getParameter("ID"));
-			String name = request.getParameter("Tennv");
-			
-			String pass = request.getParameter("Password");
-			
-			String dc = request.getParameter("Diachi");
-			//String ngayvl = request.getParameter("Date");
-			
-			
-            
-			NhaCc kh = new NhaCc(name,dc,pass);
-            try
-            {
-            	db.updateNhaCc(idd, kh);
-            	
-            	message = "Sửa Nhà cung cấp thành công.";
-            	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
-				request.setAttribute("msg1", message );
-				xxx.forward(request, response);
-            	
-            }
-            catch(Exception e)
+		case "edit":
+			try
 			{
-            	message = "Sửa Nhà cung cấp không thành công 1.";
-            	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
+				int idd = Integer.parseInt(request.getParameter("ID"));
+				String name = request.getParameter("Tennv");
+				
+				String pass = request.getParameter("Password");
+				
+				String dc = request.getParameter("Diachi");
+				//String ngayvl = request.getParameter("Date");
+				
+				
+	            
+				NhaCc kh = new NhaCc(name,dc,pass);
+	            try
+	            {
+	            	db.updateNhaCc(idd, kh);
+	            	
+	            	message = "Sửa Nhà cung cấp thành công.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+	            	
+	            }
+	            catch(Exception e)
+				{
+	            	message = "Sửa Nhà cung cấp không thành công 1.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+				}
+			}
+			catch(Exception e)
+			{
+				message = "Sửa Nhà cung cấp không thành công 2.";
+	        	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
 				request.setAttribute("msg1", message );
 				xxx.forward(request, response);
 			}
+			
+			break;
+		case "add":
+			try
+			{
+				String name = request.getParameter("Tennv");
+				
+				String pass = request.getParameter("Password");
+				
+				String dc = request.getParameter("Diachi");
+				//String ngayvl = request.getParameter("Date");
+				
+				
+	            
+				NhaCc ncc = new NhaCc(name,dc,pass);
+	            try
+	            {
+	            	db.insertNhaCc(ncc);
+	            	
+	            	message = "Thêm nhà cung cấp thành công.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+	            	
+	            }
+	            catch(Exception e)
+				{
+	            	message = "Thêm nhà cung cấp không thành công 1.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+				}
+			}
+			catch(Exception e)
+			{
+				message = "Thêm nhà cung cấp không thành công 2.";
+	        	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
+				request.setAttribute("msg1", message );
+				xxx.forward(request, response);
+			}
+			break;
+		default:
+			break;
 		}
-		catch(Exception e)
-		{
-			message = "Sửa Nhà cung cấp không thành công 2.";
-        	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
-			request.setAttribute("msg1", message );
-			xxx.forward(request, response);
-		}
-		
 			
 	}
 

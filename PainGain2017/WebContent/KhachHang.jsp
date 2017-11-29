@@ -99,7 +99,7 @@
                 <h4 class="modal-title">Thêm Khách Hàng</h4>
               </div>
               
-                <form class="form-horizontal" action="addkhachhang" method="post">
+                <form class="form-horizontal" action="actionkhachhang?action=add" method="post">
               <div class="modal-body">
         
                  <div class="form-group">
@@ -148,7 +148,7 @@
                 <h4 class="modal-title">Sửa khách hàng</h4>
               </div>
               
-                <form class="form-horizontal" action="actionkhachhang" method="post">
+                <form class="form-horizontal" action="actionkhachhang?action=edit" method="post">
               <div class="modal-body">
         
                  <div class="form-group">

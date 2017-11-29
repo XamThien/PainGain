@@ -64,11 +64,14 @@ public class ActionNhanVien extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
     	response.setCharacterEncoding("utf-8");
-		
+		String action = request.getParameter("action");
 		NhanVienDAO db = new NhanVienDAO();
 		AccountDAO db1 = new AccountDAO();
 		String message ="";
 		
+		switch (action)
+		{
+		case "edit":
 			try
 			{	
 				int idd = Integer.parseInt(request.getParameter("ID"));
@@ -110,6 +113,54 @@ public class ActionNhanVien extends HttpServlet {
 				xxx.forward(request, response);
 			}
 		
+			break;
+		case "add":
+			try
+			{
+				String name = request.getParameter("Tennv");
+				String username = request.getParameter("Username");
+				String pass = request.getParameter("Password");
+				int sex = Integer.parseInt(request.getParameter("Sex"));
+				String dc = request.getParameter("Diachi");
+				//String ngayvl = request.getParameter("Date");
+				
+				Date Ngay = new Date();
+	            SimpleDateFormat datefrmat = new SimpleDateFormat("yyyy-MM-dd");
+	            String ngayvl = datefrmat.format(Ngay);
+	            
+	            NhanVien nv = new NhanVien(name,sex,dc,ngayvl);
+	            List<NhanVien> lst =  db.getAllNhanVien();
+	            int stt = lst.size();
+	            Account acc = new Account(stt+1,username,pass);
+	            try
+	            {
+	            	db.insertNhanVien(nv);
+	            	db1.insertAccount(acc);
+	            	message = "Thêm nhân viên thành công.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("employee.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+	            	
+	            }
+	            catch(Exception e)
+				{
+	            	message = "Thêm nhân viên không thành công 1.";
+	            	RequestDispatcher xxx = request.getRequestDispatcher("employee.jsp");
+					request.setAttribute("msg1", message );
+					xxx.forward(request, response);
+				}
+			}
+			catch(Exception e)
+			{
+				message = "Thêm nhân viên không thành công 2.";
+	        	RequestDispatcher xxx = request.getRequestDispatcher("employee.jsp");
+				request.setAttribute("msg1", message );
+				xxx.forward(request, response);
+			}
+			break;
+			default:
+				break;
+		}
 			
 		
 	}

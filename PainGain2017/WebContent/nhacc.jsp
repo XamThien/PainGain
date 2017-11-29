@@ -99,7 +99,7 @@
                 <h4 class="modal-title">Thêm nhà cung cấp</h4>
               </div>
               
-                <form class="form-horizontal" action="addncc" method="post">
+                <form class="form-horizontal" action="actionncc?action=add" method="post">
               <div class="modal-body">
         
                  <div class="form-group">
@@ -148,7 +148,7 @@
                 <h4 class="modal-title">Sửa nhà cung cấp</h4>
               </div>
               
-                <form class="form-horizontal" action="actionncc" method="post">
+                <form class="form-horizontal" action="actionncc?action=edit" method="post">
               <div class="modal-body">
         
                  <div class="form-group">

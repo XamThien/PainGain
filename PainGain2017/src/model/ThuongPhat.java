@@ -17,22 +17,22 @@ public class ThuongPhat implements java.io.Serializable {
 
 	private Integer maTp;
 	private int giaTri;
-	private boolean laThuong;
-	private boolean laPhat;
+	private String ngay;
+
+	private int laThuong;
+	private int laPhat;
 	private String liDo;
 	private Integer maNv;
 
 	public ThuongPhat() {
 	}
 
-	public ThuongPhat(int giaTri, boolean laThuong, boolean laPhat) {
-		this.giaTri = giaTri;
-		this.laThuong = laThuong;
-		this.laPhat = laPhat;
-	}
+	
+	
 
-	public ThuongPhat(int giaTri, boolean laThuong, boolean laPhat, String liDo, Integer maNv) {
+	public ThuongPhat(int giaTri,String ngay, int laThuong, int laPhat, String liDo, Integer maNv) {
 		this.giaTri = giaTri;
+		this.ngay= ngay;
 		this.laThuong = laThuong;
 		this.laPhat = laPhat;
 		this.liDo = liDo;
@@ -59,22 +59,31 @@ public class ThuongPhat implements java.io.Serializable {
 	public void setGiaTri(int giaTri) {
 		this.giaTri = giaTri;
 	}
+	
+	@Column(name = "NGAY", nullable = false, length = 10)
+	public String getNgay() {
+		return this.ngay;
+	}
+
+	public void setNgay(String ngay) {
+		this.ngay = ngay;
+	}
 
 	@Column(name = "LA_THUONG", nullable = false)
-	public boolean isLaThuong() {
+	public int isLaThuong() {
 		return this.laThuong;
 	}
 
-	public void setLaThuong(boolean laThuong) {
+	public void setLaThuong(int laThuong) {
 		this.laThuong = laThuong;
 	}
 
 	@Column(name = "LA_PHAT", nullable = false)
-	public boolean isLaPhat() {
+	public int isLaPhat() {
 		return this.laPhat;
 	}
 
-	public void setLaPhat(boolean laPhat) {
+	public void setLaPhat(int laPhat) {
 		this.laPhat = laPhat;
 	}
 

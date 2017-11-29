@@ -28,14 +28,7 @@
     <servlet-name>ActionNhanVien</servlet-name>
     <url-pattern>/actionnhanvien</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>AddNhanVien</servlet-name>
-    <servlet-class>controller.AddNhanVien</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddNhanVien</servlet-name>
-    <url-pattern>/addnhanvien</url-pattern>
-  </servlet-mapping>
+  
  <!-- ======================================================= -->
   <servlet>
     <servlet-name>ActionKhachHang</servlet-name>
@@ -45,14 +38,7 @@
     <servlet-name>ActionKhachHang</servlet-name>
     <url-pattern>/actionkhachhang</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>AddKhachHang</servlet-name>
-    <servlet-class>controller.AddKhachHang</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddKhachHang</servlet-name>
-    <url-pattern>/addkhachhang</url-pattern>
-  </servlet-mapping>
+  
   <!-- =================================================================== -->
   <servlet>
     <servlet-name>ActionNcc</servlet-name>
@@ -62,14 +48,7 @@
     <servlet-name>ActionNcc</servlet-name>
     <url-pattern>/actionncc</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>AddNcc</servlet-name>
-    <servlet-class>controller.AddNcc</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddNcc</servlet-name>
-    <url-pattern>/addncc</url-pattern>
-  </servlet-mapping>
+  
  <!-- =================================================================== -->
   <filter>
     <filter-name>loginFilter</filter-name>

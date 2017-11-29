@@ -88,6 +88,7 @@ public class ThuongPhatDAO {
 	        Transaction transaction = session.beginTransaction();
 	        ThuongPhat spp = (ThuongPhat)session.load(ThuongPhat.class, id);
 	        spp.setGiaTri(sp.getGiaTri());
+	        spp.setNgay(sp.getNgay());
 	        spp.setLaThuong(sp.isLaThuong());
 	        spp.setLaPhat(sp.isLaPhat());
 	        spp.setLiDo(sp.getLiDo());
