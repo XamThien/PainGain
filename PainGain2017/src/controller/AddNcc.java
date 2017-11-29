@@ -12,22 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import DAO.*;
+
 import model.*;
 
-
 /**
- * Servlet implementation class AddKhachHang
+ * Servlet implementation class AddNcc
  */
 
-public class AddKhachHang extends HttpServlet {
+public class AddNcc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddKhachHang() {
+    public AddNcc() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +38,7 @@ public class AddKhachHang extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
     	response.setCharacterEncoding("utf-8");
 		
-		KhachHangDAO db = new KhachHangDAO();
+		NhaCcDAO db = new NhaCcDAO();
 		
 		String message ="";
 		try
@@ -53,29 +52,29 @@ public class AddKhachHang extends HttpServlet {
 			
 			
             
-			KhachHang kh = new KhachHang(name,pass,dc);
+			NhaCc ncc = new NhaCc(name,dc,pass);
             try
             {
-            	db.insertKhachHang(kh);
+            	db.insertNhaCc(ncc);
             	
-            	message = "Thêm Khách hàng thành công.";
-            	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+            	message = "Thêm nhà cung cấp thành công.";
+            	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
 				request.setAttribute("msg1", message );
 				xxx.forward(request, response);
             	
             }
             catch(Exception e)
 			{
-            	message = "Thêm Khách hàng không thành công 1.";
-            	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+            	message = "Thêm nhà cung cấp không thành công 1.";
+            	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
 				request.setAttribute("msg1", message );
 				xxx.forward(request, response);
 			}
 		}
 		catch(Exception e)
 		{
-			message = "Thêm Khách hàng không thành công 2.";
-        	RequestDispatcher xxx = request.getRequestDispatcher("KhachHang.jsp");
+			message = "Thêm nhà cung cấp không thành công 2.";
+        	RequestDispatcher xxx = request.getRequestDispatcher("nhacc.jsp");
 			request.setAttribute("msg1", message );
 			xxx.forward(request, response);
 		}

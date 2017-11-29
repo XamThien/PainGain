@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>controller.Login</servlet-class>
@@ -17,7 +18,8 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-  
+
+  <!-- =================================================================== -->
   <servlet>
     <servlet-name>ActionNhanVien</servlet-name>
     <servlet-class>controller.ActionNhanVien</servlet-class>
@@ -26,7 +28,6 @@
     <servlet-name>ActionNhanVien</servlet-name>
     <url-pattern>/actionnhanvien</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AddNhanVien</servlet-name>
     <servlet-class>controller.AddNhanVien</servlet-class>
@@ -35,7 +36,7 @@
     <servlet-name>AddNhanVien</servlet-name>
     <url-pattern>/addnhanvien</url-pattern>
   </servlet-mapping>
-  
+ <!-- ======================================================= -->
   <servlet>
     <servlet-name>ActionKhachHang</servlet-name>
     <servlet-class>controller.ActionKhachHang</servlet-class>
@@ -44,7 +45,6 @@
     <servlet-name>ActionKhachHang</servlet-name>
     <url-pattern>/actionkhachhang</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AddKhachHang</servlet-name>
     <servlet-class>controller.AddKhachHang</servlet-class>
@@ -53,16 +53,33 @@
     <servlet-name>AddKhachHang</servlet-name>
     <url-pattern>/addkhachhang</url-pattern>
   </servlet-mapping>
-  
+  <!-- =================================================================== -->
+  <servlet>
+    <servlet-name>ActionNcc</servlet-name>
+    <servlet-class>controller.ActionNcc</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActionNcc</servlet-name>
+    <url-pattern>/actionncc</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddNcc</servlet-name>
+    <servlet-class>controller.AddNcc</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddNcc</servlet-name>
+    <url-pattern>/addncc</url-pattern>
+  </servlet-mapping>
+ <!-- =================================================================== -->
   <filter>
-        <filter-name>loginFilter</filter-name>
-        <filter-class>paingainshop.filter.loginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>loginFilter</filter-name>
-        <url-pattern>/home.jsp</url-pattern>
-        <url-pattern>/employee.jsp</url-pattern>
-        <url-pattern>/KhachHang.jsp</url-pattern>
-        
-    </filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>paingainshop.filter.loginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/home.jsp</url-pattern>
+    <url-pattern>/employee.jsp</url-pattern>
+    <url-pattern>/KhachHang.jsp</url-pattern>
+  </filter-mapping>
+
 </web-app>
