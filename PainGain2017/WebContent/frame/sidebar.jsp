@@ -73,11 +73,11 @@
                     <li><a href="${pageContext.request.contextPath}/tinhluong.jsp"><i class="fa fa-circle-o"></i>Tính
                             lương</a></li>
                 </ul></li>
-            <li><a href="${pageContext.request.contextPath}/bangchamcong"> <i
+            <li><a href="${pageContext.request.contextPath}/chamcong.jsp"> <i
                         class="fa fa-dashboard"></i> <span>Chấm công</span>
                 </a></li>
-            <li><a href="${pageContext.request.contextPath}/loaddsphieuchi"> <i
-                        class="fa fa-dashboard"></i> <span>Danh sách phiếu chi</span>
+            <li><a href="${pageContext.request.contextPath}/thuongphat.jsp"> <i
+                        class="fa fa-dashboard"></i> <span>Thưởng phạt</span>
                 </a></li>
             <!-- NHÉT CÁI DANH MỤC NHÉ -->
         </ul>

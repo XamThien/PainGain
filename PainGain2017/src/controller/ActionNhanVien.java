@@ -132,14 +132,24 @@ public class ActionNhanVien extends HttpServlet {
 	            List<NhanVien> lst =  db.getAllNhanVien();
 	            int stt = lst.size();
 	            Account acc = new Account(stt+1,username,pass);
+	            //kiem tra ten dang nhap da ton tai chua
+	            Account check = db1.getAccountByName(username);
 	            try
 	            {
-	            	db.insertNhanVien(nv);
-	            	db1.insertAccount(acc);
-	            	message = "Thêm nhân viên thành công.";
-	            	RequestDispatcher xxx = request.getRequestDispatcher("employee.jsp");
-					request.setAttribute("msg1", message );
-					xxx.forward(request, response);
+	            	if(check==null) {
+	            		db.insertNhanVien(nv);
+		            	db1.insertAccount(acc);
+		            	message = "Thêm nhân viên thành công.";
+		            	RequestDispatcher xxx = request.getRequestDispatcher("employee.jsp");
+						request.setAttribute("msg1", message );
+						xxx.forward(request, response);
+	            	}
+	            	else {
+	            		message = "Tên đăng nhập nhân viên đã tồn tại.";
+		            	RequestDispatcher xxx = request.getRequestDispatcher("employee.jsp");
+						request.setAttribute("msg1", message );
+						xxx.forward(request, response);
+	            	}
 	            	
 	            }
 	            catch(Exception e)

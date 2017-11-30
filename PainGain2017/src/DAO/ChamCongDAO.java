@@ -20,7 +20,7 @@ import model.ChamCong;
 
 public class ChamCongDAO {
 	 @SuppressWarnings("unchecked")
-	public  List<ChamCong> getAllChamCong(){
+	public  List<ChamCong> getAllChamCong(int Ma_NV,String date){
 		 List<ChamCong> list=null;
 	        try
 	        {
@@ -30,8 +30,10 @@ public class ChamCongDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from ChamCong";
+		        String hql ="from ChamCong where MA_NV="+Ma_NV +" and Month(NGAY)=Month(:month) and Year(NGAY)=Year(:year) order by MA_CC";
 		        Query que = session.createQuery(hql);
+		        que.setParameter("month", date);
+		        que.setParameter("year", date);
 		        list = que.list();
 		        transaction.commit();
 	        }
@@ -40,7 +42,7 @@ public class ChamCongDAO {
 	        }
 	        return list;
 	}
-	 public ChamCong getChamCong(int id) {
+	 public ChamCong getChamCong(int id,String date,int ma_ca) {
 		 ChamCong cl = null;
 	       try
 	       {
@@ -50,8 +52,10 @@ public class ChamCongDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from ChamCong where MA_CC="+id;
+		        String hql ="from ChamCong where MA_CC="+id +"and NGAY=:date and MA_CA=:ca";
 		        Query que = session.createQuery(hql);
+		        que.setParameter("date", date);
+		        que.setParameter("ca", ma_ca);
 		        cl = (ChamCong) que.uniqueResult();
 		        transaction.commit();
 		        //session.close();
@@ -99,6 +103,10 @@ public class ChamCongDAO {
 	        transaction.commit();
 	        //session.close();
 	    }
+	 public static void main(String[] args) {
+//		ChamCong cc = new ChamCongDAO().getChamCong(1,"2017-11-29");
+//		System.out.println(cc.getMaNv());
+	}
 	 
 	
 }

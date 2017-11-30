@@ -1,6 +1,9 @@
 package DAO;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.hibernate.Query;
@@ -20,7 +23,7 @@ import model.ThuongPhat;
 
 public class ThuongPhatDAO {
 	 @SuppressWarnings("unchecked")
-	public  List<ThuongPhat> getAllThuongPhat(){
+	public  List<ThuongPhat> getAllThuongPhat(int ma,String date){
 		 List<ThuongPhat> list=null;
 	        try
 	        {
@@ -30,8 +33,11 @@ public class ThuongPhatDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from ThuongPhat";
+		        String hql ="from ThuongPhat where MA_NV=:ma and Month(NGAY)=Month(:month) and Year(NGAY)=Year(:year) ";
 		        Query que = session.createQuery(hql);
+		        que.setParameter("ma", ma);
+		        que.setParameter("month", date);
+		        que.setParameter("year", date);
 		        list = que.list();
 		        transaction.commit();
 	        }
@@ -89,8 +95,8 @@ public class ThuongPhatDAO {
 	        ThuongPhat spp = (ThuongPhat)session.load(ThuongPhat.class, id);
 	        spp.setGiaTri(sp.getGiaTri());
 	        spp.setNgay(sp.getNgay());
-	        spp.setLaThuong(sp.isLaThuong());
-	        spp.setLaPhat(sp.isLaPhat());
+	        spp.setLaThuong(sp.getLaThuong());
+	        spp.setLaPhat(sp.getLaPhat());
 	        spp.setLiDo(sp.getLiDo());
 	        spp.setMaNv(sp.getMaNv());
 	        
@@ -101,6 +107,38 @@ public class ThuongPhatDAO {
 	        transaction.commit();
 	        //session.close();
 	    }
-	 
+	 public static void main(String[] args) {
+//		    String myTime = "10:30:54";
+//		    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+//		    Date date = null;
+//		    try {
+//		        date = sdf.parse(myTime);
+//		        String formattedTime = sdf.format(date);
+//		        System.out.println(formattedTime);
+//		    } catch (ParseException e) {
+//		        e.printStackTrace();
+//		    }
+		 	String dateStart = "09:33:58";
+	        String dateStop = "10:34:59";
+	        // Custom date format
+	        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+	        Date d1 = null;
+	        Date d2 = null;
+	        try {
+	            d1 = format.parse(dateStart);
+	            d2 = format.parse(dateStop);
+	         // Get msec from each, and subtract.
+		        long diff = d2.getTime() - d1.getTime();
+		        //long diffSeconds = diff / 1000;
+		        long diffMinutes = diff / (60 * 1000);
+		        //long diffHours = diff / (60 * 60 * 1000);
+		        //System.out.println("Số giây : " + diffSeconds + " seconds.");
+		        System.out.println("Số phút: " + diffMinutes + " minutes.");
+		        //System.out.println("Số giờ: " + diffHours + " hours.");
+	        } catch (ParseException e) {
+	        }
+	        
+		    
+	}
 	
 }

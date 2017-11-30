@@ -70,7 +70,7 @@ public class ThuongPhat implements java.io.Serializable {
 	}
 
 	@Column(name = "LA_THUONG", nullable = false)
-	public int isLaThuong() {
+	public int getLaThuong() {
 		return this.laThuong;
 	}
 
@@ -79,7 +79,7 @@ public class ThuongPhat implements java.io.Serializable {
 	}
 
 	@Column(name = "LA_PHAT", nullable = false)
-	public int isLaPhat() {
+	public int getLaPhat() {
 		return this.laPhat;
 	}
 
