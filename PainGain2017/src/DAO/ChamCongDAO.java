@@ -42,7 +42,7 @@ public class ChamCongDAO {
 	        }
 	        return list;
 	}
-	 public ChamCong getChamCong(int id,String date,int ma_ca) {
+	 public ChamCong getChamCong(int id,String date,int ca) {
 		 ChamCong cl = null;
 	       try
 	       {
@@ -52,10 +52,11 @@ public class ChamCongDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from ChamCong where MA_CC="+id +"and NGAY=:date and MA_CA=:ca";
+		        String hql ="from ChamCong where MA_NV="+ id+" and NGAY=:datex and MA_CA="+ca ;
 		        Query que = session.createQuery(hql);
-		        que.setParameter("date", date);
-		        que.setParameter("ca", ma_ca);
+		        //que.setParameter("id", id);
+		        que.setParameter("datex", date);
+		        //que.setParameter("ca", ma_ca);
 		        cl = (ChamCong) que.uniqueResult();
 		        transaction.commit();
 		        //session.close();
@@ -104,8 +105,8 @@ public class ChamCongDAO {
 	        //session.close();
 	    }
 	 public static void main(String[] args) {
-//		ChamCong cc = new ChamCongDAO().getChamCong(1,"2017-11-29");
-//		System.out.println(cc.getMaNv());
+		ChamCong cc = new ChamCongDAO().getChamCong(1,"2017-11-30",1);
+		System.out.println(cc);
 	}
 	 
 	

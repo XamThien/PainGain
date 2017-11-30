@@ -147,7 +147,7 @@
                 <form class="form-horizontal" action="addthuongphat" method="post">
               <div class="modal-body">
         		<div class="form-group">
-                  <label for="inputText5" class="col-sm-2 control-label">Ca làm</label>
+                  <label for="inputText5" class="col-sm-2 control-label">Nhân viên</label>
                   <div class="col-sm-10">
                     
 					<select class="form-control" id="inputText2"  name="ID" >
@@ -168,7 +168,7 @@
                   <label for="inputText1" class="col-sm-2 control-label">Giá trị</label>
                   <div class="col-sm-10">
                   	
-                    <input type="text" class="form-control" id="inputText11"  name="giatri">
+                    <input type="number" class="form-control" id="inputText11"  name="giatri">
                   </div>
                 </div>
                 

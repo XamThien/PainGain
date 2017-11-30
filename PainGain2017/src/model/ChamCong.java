@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 public class ChamCong implements java.io.Serializable {
 
 	private Integer maCc;
-	private int maNv;
+	private Integer maNv;
 	private String gioBatDau;
 	private String gioKetThuc;
 	private String ngay;
@@ -28,14 +28,9 @@ public class ChamCong implements java.io.Serializable {
 	public ChamCong() {
 	}
 
-	public ChamCong(int maNv, String gioBatDau, String gioKetThuc, String ngay) {
-		this.maNv = maNv;
-		this.gioBatDau = gioBatDau;
-		this.gioKetThuc = gioKetThuc;
-		this.ngay = ngay;
-	}
+	
 
-	public ChamCong(int maNv, String gioBatDau, String gioKetThuc, String ngay, Integer maCa) {
+	public ChamCong(Integer maNv, String gioBatDau, String gioKetThuc, String ngay, Integer maCa) {
 		this.maNv = maNv;
 		this.gioBatDau = gioBatDau;
 		this.gioKetThuc = gioKetThuc;
@@ -56,11 +51,11 @@ public class ChamCong implements java.io.Serializable {
 	}
 
 	@Column(name = "MA_NV", nullable = false)
-	public int getMaNv() {
+	public Integer getMaNv() {
 		return this.maNv;
 	}
 
-	public void setMaNv(int maNv) {
+	public void setMaNv(Integer maNv) {
 		this.maNv = maNv;
 	}
 
