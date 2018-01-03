@@ -17,7 +17,7 @@ function showHint(str) {
         $('#result1').html("");
         $("#sugges1").hide();
     } else {
-        $.get("searchproduct",
+        $.get("/PainGain2017/searchproduct",
                 {txtsearch: str},
                 function (data) {
                     $('#result1').html(data);
@@ -82,12 +82,12 @@ function addRegister() {
 }
 function addCustomer() {
     var tenkh = $("#inputText1").val();
-    var sodt = $("#inputText3").val();
-    var diachi = $("#inputText2").val();
-    var email = $("#inputText4").val();
+    var sodt = $("#inputText2").val();
+    var diachi = $("#inputText3").val();
+    
 
     $.get("addcustomer",
-            {TenKH: tenkh, SDT: sodt, Address: diachi, Email: email},
+            {TenKH: tenkh, SDT: sodt, Address: diachi},
             function (data) {
                 $("#msg").html(data);
             }
@@ -198,7 +198,7 @@ function addProduct(){
     var giaban=$("#inputText7").val();
     var gianhap=$("#inputText8").val();
     var ghichu=$("#inputText9").val();
-    $.get("http://localhost:8080/paingainshop/addnewproduct",{
+    $.get("/addnewproduct",{
         productname:tenh, category:nhomh, outprice:giaban, inprice:gianhap,
         attribute1:thuoctinh, sl:soluong, dvt:dv, vendor: ncc, attribute2:ghichu
     },function(data){
@@ -210,7 +210,7 @@ function dhsearchProduct(str) {
         $('#result1').html("");
         $("#sugges1").hide();
     } else {
-        $.get("http://localhost:8080/paingainshop/donhang/search",
+        $.get("/PainGain2017/donhang/search",
                 {txtsearch: str},
                 function (data) {
                     $('#result1').html(data);
@@ -222,7 +222,7 @@ function dhsearchProduct(str) {
 function dhthemSanpham(mahh){
     $("#sugges1").hide();
     $("#txtsearch1").val('');
-    $.getJSON("/donhang/add",
+    $.getJSON("donhang/add",
             {maHH: mahh},
             function (data) {
                 $('#hoadondetail').html(data['list']);
@@ -231,7 +231,7 @@ function dhthemSanpham(mahh){
     );
 }
 function confirmDHRemove(mah){
-    $.getJSON("/donhang/remove",
+    $.getJSON("/PainGain2017/donhang/remove",
             {MaHH: mah},
             function (data) {
                 $('#hoadondetail').html(data['list']);
@@ -244,7 +244,7 @@ function donhangEdit(dt){
     var mahh = elem.attr("for");
     var dg = elem.children().children()[0].value;
     var sl = elem.children().children()[1].value;
-    $.getJSON("/donhang/edit",
+    $.getJSON("/PainGain2017/donhang/edit",
             {MaHH: mahh, DonGia: dg, SoLuong: sl},
             function (data) {
                 $('#hoadondetail').html(data['list']);
@@ -253,7 +253,7 @@ function donhangEdit(dt){
     );
 }
 function saveDonDatHang() {
-    $.get("http://localhost:8080/paingainshop/donhang/save",
+    $.get("/PainGain2017/donhang/save",
             function (data) {
                 if (data == "success") {
                     alert("Lưu thành công hóa đơn");
@@ -264,32 +264,10 @@ function saveDonDatHang() {
             });
 }
 function capnhatDonHang(madh){
-    $.get("http://localhost:8080/paingainshop/donhang/updatettdondathang",
+    $.get("/PainGain2017/donhang/updatettdondathang",
     {MaDDH:madh},
     function(data){
         alert(data);
     }
     );
-}
-function addEmployee() {
-    var tennv = $("#inputText1").val();
-    var username = $("#inputText2").val();
-    var email = $("#inputText3").val();
-    var pass = $("#inputText4").val();
-    var diachi = $("#inputText5").val();
-    var sodt = $("#inputText6").val();
-    var luong = $("#inputText7").val();
-    var ghichu = $("#inputText8").val();
-    $.get("/addemployee",
-            {Tennv: tennv, Luong: luong, Username: username, Pass: pass, Email: email, DiaChi: diachi, SDT: sodt, dc: ghichu},
-            function (data) {
-                
-                if(data=='success'){
-                    alert("Thêm nhân viên thành công");
-                    location.reload();
-                }else{
-                    alert(data);
-                }
-                
-            });
 }

@@ -19,42 +19,88 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
     <%
-    Date dNow = new Date( );
-    SimpleDateFormat ft = new SimpleDateFormat ("MM");
-    String month =  ft.format(dNow);
+    String month = request.getParameter("month");
+    String year = request.getParameter("year");
+    int curyear=0;
+    String date;
+    if(month!=null && year!=null)
+    {
+    	Date dNow = new Date( );
+        SimpleDateFormat ftt = new SimpleDateFormat ("yyyy");
+        curyear =  Integer.parseInt(ftt.format(dNow));
+        
+        date = year+"-"+month+"-10";
+    }
+    else {
+    	Date dNow = new Date( );
+        SimpleDateFormat ft = new SimpleDateFormat ("MM");
+        month =  ft.format(dNow);
+        
+        SimpleDateFormat ftx = new SimpleDateFormat ("yyyy-MM-dd");
+        date =  ftx.format(dNow);
+        
+        SimpleDateFormat fttt = new SimpleDateFormat ("yyyy");
+        curyear =  Integer.parseInt(fttt.format(dNow));
+        year= fttt.format(dNow);
+    }
+    
     
     %>
-        <h1>
-            Bảng thưởng phạt tháng <%=month %>
+        
+        <span style="color:red"><i>${msg}</i></span>
+        <form class="formtl" action="thuongphat.jsp" method="get">
+				<ul class="ulstyle" >
+					<li><a href="#"><i class="fa fa-dashboard"></i>Tháng: </a></li>
+					
+					<li>
+							
+								<select  id="monthx"  name="month"  >
+								<%
+			                    	for(int i=1; i<13;i++)
+			                    	{
+			                    		
+			                    		
+			                    %>
+			                     <option value="<%=i%>"> Tháng <%=i %> </option> 
+			                     
+									
+								<%} %>
+								
+								</select>
+							
+					</li>
+					<li>
+							
+								<select  id="yearx"  name="year"  >
+								<%
+			                    	for(int j=2017; j<curyear+1;j++)
+			                    	{
+			                    		
+			                    		
+			                    %>
+			                     <option value="<%=j%>"> Năm <%=j %> </option> 
+			                     
+									
+								<%} %>
+								
+								</select>
+							
+					</li>
+					<li>
+						<input class = "btn btn-link" type="submit" value="Chi tiết">
+					</li>
+				</ul>
+				
+		</form>
+		<h1>
+            Bảng thưởng phạt tháng <%=month %> năm <%=year %>
            
         </h1>
-        <span style="color:red"><i>${msg}</i></span>
-        <ol class="breadcrumb">
-			<li><a href="home.jsp"><i class="fa fa-dashboard"></i>Tháng: </a></li>
-			<li>
-					
-						<select  id="inputText2"  name="month" onchange="location = this.value;" >
-						<%
-	                    	for(int i=1; i<13;i++)
-	                    	{
-	                    		
-	                    		
-	                    %>
-	                     <option value="home.jsp"> Tháng <%=i %> </option> 
-	                     
-							
-						<%} %>
-						
-						</select>
-					
-			</li>
-			
-		</ol>
     </section>
     
     <section class="content">
         <!-- Small boxes (Stat box) -->
-        <div class="row">
+        <div class="row" style="margin-top: 10px;">
             <div class="col-md-10">
                 <div class="box box-primary">
 
@@ -73,13 +119,20 @@
                             </thead>
                             <tbody>
                                <%
-                               Date dNowx = new Date( );
-                               SimpleDateFormat ftx = new SimpleDateFormat ("yyyy-MM-dd");
-                               String datex =  ftx.format(dNowx);
-                               
+                              
                                HttpSession sessx = request.getSession();
            	                   Account acc = (Account)sessx.getAttribute("login");
-                               List<ThuongPhat> lst = new ThuongPhatDAO().getAllThuongPhat(acc.getMaAc(),datex);
+           	                   NhanVien xxxx = new NhanVienDAO().getNhanVienByID(acc.getMaAc());
+                               List<ThuongPhat> lst = null;
+                               if (xxxx.getTenNv().equals("Admin"))
+                               {
+                            	   
+                            	   lst= new ThuongPhatDAO().getFullThuongPhat(date);
+                            	   
+                               }
+                               else {
+                            	   lst= new ThuongPhatDAO().getAllThuongPhat(acc.getMaAc(),date);
+                               }
                                if (lst!=null)
                                {
                             	   for (ThuongPhat tp : lst)
@@ -88,7 +141,23 @@
                                
                                %>
                                 <tr>
-                                    <td><%=acc.getUserName() %></td>
+                                    <td><%
+                                    if (xxxx.getTenNv().equals("Admin"))
+                                    {
+                                    	
+                                    	NhanVien aa = new NhanVienDAO().getNhanVienByID(tp.getMaNv());
+                                    	
+                                		out.print(aa.getTenNv());
+                                		
+                                    }
+                                    else
+                                    {
+                                    	
+                                		out.print(xxxx.getTenNv());
+                                		
+                                	
+                                    }
+                                    %></td>
                                     <td><%=tp.getGiaTri() %></td>
                                    <%
                                    if (tp.getLaPhat()==1)
@@ -100,7 +169,7 @@
                                    }
                                    else
                                    {
-                                	   %>
+                                	    %>
                                	    <td>1</td>
                            			<td>0</td>
                                	   		<% 
@@ -127,10 +196,19 @@
                     <!-- /.box-body -->
                 </div>
             </div>
-            <div class="col-md-2">
-                <button class="btn btn-primary" id="btnaddemployee" data-toggle="modal" data-target="#addnew">Thêm mới</button>
+            <%
+            if (nvv.getTenNv().equals("Admin"))
+            {
+            
+            %>
+            <div class="col-md-1">
+                <button class="btn btn-primary tpAdd" id="btnaddemployee" data-toggle="modal" data-target="#addnew">Thêm mới</button>
 
             </div>
+            <%
+            	
+            }
+            %>
         </div>
     </section>
     <!-- ===================================================================================== -->

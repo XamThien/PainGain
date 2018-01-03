@@ -16,6 +16,7 @@ import org.hibernate.cfg.Configuration;
 
 
 import model.SanPham;
+import model.NhaCc;
 
 
 public class SanPhamDAO {
@@ -40,7 +41,29 @@ public class SanPhamDAO {
 	        }
 	        return list;
 	}
-	 public SanPham getSanPham(int id) {
+	 @SuppressWarnings("unchecked")
+	public  List<SanPham> getLikeString(String str) throws Exception{
+		 List<SanPham> list=null;
+	        try
+	        {
+	        	Configuration configuration =  new Configuration().configure();
+	        	SessionFactory sessionFactory = configuration.buildSessionFactory();
+	        	Session session = sessionFactory.openSession();
+	        	
+	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		        Transaction transaction = session.beginTransaction();
+		        String hql ="from SanPham where TEN_SP like '%" + str+" %'";
+		        Query que = session.createQuery(hql);
+		        
+		        list = que.list();
+		        transaction.commit();
+	        }
+	        catch  (HibernateException e) {
+	        	 e.printStackTrace();
+	        }
+	        return list;
+	}
+	 public SanPham getSanPham(Integer id) {
 		 SanPham cl = null;
 	       try
 	       {
@@ -52,6 +75,7 @@ public class SanPhamDAO {
 		        Transaction transaction = session.beginTransaction();
 		        String hql ="from SanPham where MA_SP="+id;
 		        Query que = session.createQuery(hql);
+		        
 		        cl = (SanPham) que.uniqueResult();
 		        transaction.commit();
 		        //session.close();
@@ -81,7 +105,7 @@ public class SanPhamDAO {
 	        transaction.commit();
 	        //session.close();
 	    }
-	 public void updateNhanVien(int id,SanPham sp){
+	 public void updateSanPham(int id,SanPham sp){
 		 	Configuration configuration =  new Configuration().configure();
 	     	SessionFactory sessionFactory = configuration.buildSessionFactory();
 	     	Session session = sessionFactory.openSession();
@@ -100,6 +124,21 @@ public class SanPhamDAO {
 	        transaction.commit();
 	        //session.close();
 	    }
-	 
+	 public static void main(String[] args) throws Exception {
+//		SanPham sp = new SanPhamDAO().getSanPham(2);
+//		if(sp!=null)
+//		{
+//			System.out.println(sp.getDonGiaBan());
+//		}
+//		else {
+//			System.out.println("======================================================");
+//		}
+//		 
+//		 SanPham hh = new SanPhamDAO().getSanPham(6);
+//		 //System.out.println(hh.getDonGiaBan());
+//		 int xxx = new NhaccSanphamDAO().getNhaccByIdSanpham(hh.getMaSp()).getMaNcc();
+//		 System.out.println(xxx);
+		 
+	}
 	
 }

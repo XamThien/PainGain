@@ -16,6 +16,7 @@ import org.hibernate.cfg.Configuration;
 
 
 import model.KhachHang;
+import model.SanPham;
 
 
 public class KhachHangDAO {
@@ -40,6 +41,28 @@ public class KhachHangDAO {
 	        }
 	        return list;
 	}
+	 @SuppressWarnings("unchecked")
+		public  List<KhachHang> getLikeString(String str) throws Exception{
+			 List<KhachHang> list=null;
+		        try
+		        {
+		        	Configuration configuration =  new Configuration().configure();
+		        	SessionFactory sessionFactory = configuration.buildSessionFactory();
+		        	Session session = sessionFactory.openSession();
+		        	
+		        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			        Transaction transaction = session.beginTransaction();
+			        String hql ="from KhachHang where TEN_KH like '%" + str+"%'";
+			        Query que = session.createQuery(hql);
+			        
+			        list = que.list();
+			        transaction.commit();
+		        }
+		        catch  (HibernateException e) {
+		        	 e.printStackTrace();
+		        }
+		        return list;
+		}
 	 public KhachHang getKhachHang(int id) {
 		 KhachHang cl = null;
 	       try

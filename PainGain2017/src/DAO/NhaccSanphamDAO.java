@@ -33,6 +33,7 @@ public class NhaccSanphamDAO {
 		        String hql ="from NhaccSanpham";
 		        Query que = session.createQuery(hql);
 		        list = que.list();
+		        
 		        transaction.commit();
 	        }
 	        catch  (HibernateException e) {
@@ -40,8 +41,10 @@ public class NhaccSanphamDAO {
 	        }
 	        return list;
 	}
-	 public NhaccSanpham getNhaccSanpham(int id) {
-		 NhaccSanpham cl = null;
+	 @SuppressWarnings("unchecked")
+	public NhaccSanpham getNhaccByIdSanpham(int id) {
+		 List<NhaccSanpham> listx = null;
+		 NhaccSanpham NccSp = null;
 	       try
 	       {
 	    	    Configuration configuration =  new Configuration().configure();
@@ -50,16 +53,17 @@ public class NhaccSanphamDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from NhaccSanpham where MA_NHACC_SANPHAM="+id;
+		        String hql ="from NhaccSanpham where MA_SP="+id;
 		        Query que = session.createQuery(hql);
-		        cl = (NhaccSanpham) que.uniqueResult();
+		        listx  = que.list();
+		        NccSp =  listx.get(0);
 		        transaction.commit();
 		        //session.close();
 	       }
 	       catch  (HibernateException e) {
 	    	   e.printStackTrace();
 	        }
-	        return cl;
+	        return NccSp;
 	    }
 	 public void insertNhaccSanpham(NhaccSanpham sp){
 		 	Configuration configuration =  new Configuration().configure();

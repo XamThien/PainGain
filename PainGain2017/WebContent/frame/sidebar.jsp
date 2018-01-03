@@ -1,4 +1,5 @@
 <%@page import="model.Account"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="model.NhanVien"%>
 <%@page import="DAO.NhanVienDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,7 +17,15 @@
             	<%
 	            	HttpSession sessi = request.getSession();
 	                Account nvcx = (Account)sessi.getAttribute("login");
+	                if (nvcx==null)
+	                {
+	                %> 
+	                	<c:redirect url="/login.jsp" />
+	                <%
+	                }
+	                
 	                NhanVien nvv = new NhanVienDAO().getNhanVienByID(nvcx.getMaAc());
+	                
             	%>
                 <p><%=nvv.getTenNv() %></p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
@@ -32,15 +41,25 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class=""><a href="${pageContext.request.contextPath}/addproduct.jsp"><i
+                    <li class=""><a href="${pageContext.request.contextPath}/addNewSP.jsp"><i
                                 class="fa fa-circle-o"></i>Thêm mới</a></li>
-                    <li><a href="${pageContext.request.contextPath}/donhang/danhsach"><i
+                                
+                    <li><a href="${pageContext.request.contextPath}/ddh.jsp"><i
                                 class="fa fa-circle-o"></i>Nhập hàng</a></li>
-                    <li><a href="${pageContext.request.contextPath}/danhsach"><i
-                                class="fa fa-circle-o"></i>Quản lí hàng hóa</a></li>
-                    <li><a href="${pageContext.request.contextPath}/createhoadon"><i
+                                
+                    <li><a href="${pageContext.request.contextPath}/createbill.jsp"><i
                                 class="fa fa-circle-o"></i>Bán hàng</a></li>
-                    <li><a href="${pageContext.request.contextPath}/hoadon"><i
+                                
+                    <li><a href="${pageContext.request.contextPath}/hanghoa.jsp"><i
+                                class="fa fa-circle-o"></i>Hàng hóa</a></li>
+                                
+                    <li><a href="${pageContext.request.contextPath}/DanhMucSP.jsp"><i
+                                class="fa fa-circle-o"></i>Danh mục hàng hóa</a></li>
+                                
+                    <li><a href="${pageContext.request.contextPath}/LoaiSP.jsp"><i
+                                class="fa fa-circle-o"></i>Loại sản phẩm</a></li>
+                    
+                    <li><a href="${pageContext.request.contextPath}/hoadon.jsp"><i
                                 class="fa fa-circle-o"></i>Hóa đơn</a></li>
                     
                 </ul></li>
@@ -68,8 +87,15 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                <%
+                	if(nvv.getTenNv().equals("Admin"))
+                	{
+                		
+                	
+                %>
                     <li class=""><a href="${pageContext.request.contextPath}/employee.jsp"><i
                                 class="fa fa-circle-o"></i>Quản lí</a></li>
+                <% }%>
                     <li><a href="${pageContext.request.contextPath}/tinhluong.jsp"><i class="fa fa-circle-o"></i>Tính
                             lương</a></li>
                 </ul></li>

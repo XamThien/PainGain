@@ -20,7 +20,7 @@ import model.ChiTietHoaDon;
 
 public class ChiTietHoaDonDAO {
 	 @SuppressWarnings("unchecked")
-	public  List<ChiTietHoaDon> getAllChiTietHoaDon(){
+	public  List<ChiTietHoaDon> getAllChiTietHoaDon(int MaHD){
 		 List<ChiTietHoaDon> list=null;
 	        try
 	        {
@@ -30,8 +30,9 @@ public class ChiTietHoaDonDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from ChiTietHoaDon";
+		        String hql ="from ChiTietHoaDon where MA_HD=:ma ";
 		        Query que = session.createQuery(hql);
+		        que.setParameter("ma", MaHD);
 		        list = que.list();
 		        transaction.commit();
 	        }
@@ -99,6 +100,12 @@ public class ChiTietHoaDonDAO {
 	        transaction.commit();
 	        //session.close();
 	    }
-	 
+	 public static void main(String[] args) {
+		List<ChiTietHoaDon> lst = new ChiTietHoaDonDAO().getAllChiTietHoaDon(3);
+		for (ChiTietHoaDon ct : lst)
+		{
+			System.out.println(ct.getSoLuong());
+		}
+	}
 	
 }

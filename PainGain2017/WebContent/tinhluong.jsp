@@ -17,37 +17,80 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 	<%
-    Date dNow = new Date( );
-    SimpleDateFormat ft = new SimpleDateFormat ("MM");
-    String month =  ft.format(dNow);
+	String month = request.getParameter("month");
+    String year = request.getParameter("year");
     
-    SimpleDateFormat ftt = new SimpleDateFormat ("yyyy-MM-dd");
-    String date =  ftt.format(dNow);
+    SimpleDateFormat fttt = new SimpleDateFormat ("yyyy");
+    Date dNow = new Date( );
+    int curyear =  Integer.parseInt(fttt.format(dNow));
+    
+    String date;
+    if(month!=null && year!=null)
+    {
+    	date = year+"-"+month+"-10";
+    }
+    else
+    {
+    	
+        SimpleDateFormat ft = new SimpleDateFormat ("MM");
+        month =  ft.format(dNow);
+        
+        SimpleDateFormat ftt = new SimpleDateFormat ("yyyy-MM-dd");
+        date =  ftt.format(dNow);
+        
+        SimpleDateFormat ftyear = new SimpleDateFormat ("yyyy");
+        year =  ftyear.format(dNow);
+        
+    }
     %>
-		<h1>
-			Quản lý tính lương tháng <%=month %>
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="home.jsp"><i class="fa fa-dashboard"></i>Tháng: </a></li>
-			<li>
+		
+		<form class="formtl" action="tinhluong.jsp" method="get">
+				<ul class="ulstyle" >
+					<li><a href="#"><i class="fa fa-dashboard"></i>Tháng: </a></li>
 					
-						<select  id="inputText2"  name="month" onchange="location = this.value;" >
-						<%
-	                    	for(int i=1; i<13;i++)
-	                    	{
-	                    		
-	                    		
-	                    %>
-	                     <option value="home.jsp"> Tháng <%=i %> </option> 
-	                     
+					<li>
 							
-						<%} %>
-						
-						</select>
-					
-			</li>
-			
-		</ol>
+								<select  id="monthx"  name="month"  >
+								<%
+			                    	for(int i=1; i<13;i++)
+			                    	{
+			                    		
+			                    		
+			                    %>
+			                     <option value="<%=i%>"> Tháng <%=i %> </option> 
+			                     
+									
+								<%} %>
+								
+								</select>
+							
+					</li>
+					<li>
+							
+								<select  id="yearx"  name="year"  >
+								<%
+			                    	for(int j=2017; j<curyear+1;j++)
+			                    	{
+			                    		
+			                    		
+			                    %>
+			                     <option value="<%=j%>"> Năm <%=j %> </option> 
+			                     
+									
+								<%} %>
+								
+								</select>
+							
+					</li>
+					<li>
+						<input class = "btn btn-link" type="submit" value="Chi tiết">
+					</li>
+				</ul>
+				
+		</form>
+		<h1>
+			Quản lý tính lương tháng <%=month %> năm <%=year %>
+		</h1>
 	</section>
 	<section class="content">
 	<span style="color:red"><i id="msg"></i></span>
@@ -72,11 +115,9 @@
 		<div class="row">
 	        <div class="col-xs-12">
 	          <div class="box">
-	            <div class="box-header">
-	              <h3 class="box-title">Danh sách</h3>
-	            </div>
+	            
 	            <!-- /.box-header -->
-	            <marquee behavior="scroll" direction="left" style="width: 100%; overflow-y: hidden;color : pink;">TRANG NÀY ĐANG TRONG QUÁ TRÌNH HOÀN THIỆN NỘI DUNG... HÃY THÔNG CẢM CHO DỊCH VỤ CỦA CHÚNG TÔI NHÉ. THẢ TIM. </marquee>
+	            
 	            <div class="box-body">
 	              <table id="example1" class="table table-striped table-bordered  table-hover">
 	                <thead>

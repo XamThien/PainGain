@@ -30,7 +30,7 @@ public class HoaDonDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from HoaDon";
+		        String hql ="from HoaDon order by MA_HD DESC";
 		        Query que = session.createQuery(hql);
 		        list = que.list();
 		        transaction.commit();
@@ -40,6 +40,53 @@ public class HoaDonDAO {
 	        }
 	        return list;
 	}
+	 @SuppressWarnings("unchecked")
+		public  List<HoaDon> getOnDayHoaDon(String date){
+			 List<HoaDon> list=null;
+		        try
+		        {
+		        	Configuration configuration =  new Configuration().configure();
+		        	SessionFactory sessionFactory = configuration.buildSessionFactory();
+		        	Session session = sessionFactory.openSession();
+		        	
+		        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			        Transaction transaction = session.beginTransaction();
+			        String hql ="from HoaDon where Day(NGAY_LAP)=Day(:day) and Month(NGAY_LAP)=Month(:month) and Year(NGAY_LAP)=Year(:year) ";
+			        Query que = session.createQuery(hql);
+			        
+			        que.setParameter("day", date);
+			        que.setParameter("month", date);
+			        que.setParameter("year", date);
+			        list = que.list();
+			        transaction.commit();
+		        }
+		        catch  (HibernateException e) {
+		        	 e.printStackTrace();
+		        }
+		        return list;
+		}
+	 public HoaDon getLastHoaDon() {
+		 HoaDon cl = null;
+		 List<HoaDon> list=null;
+	       try
+	       {
+	    	   Configuration configuration =  new Configuration().configure();
+	        	SessionFactory sessionFactory = configuration.buildSessionFactory();
+	        	Session session = sessionFactory.openSession();
+	        	
+	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		        Transaction transaction = session.beginTransaction();
+		        String hql ="from HoaDon order by MA_HD DESC";
+		        Query que = session.createQuery(hql);
+		        list = que.list();
+		        cl = list.get(0);
+		        transaction.commit();
+	       }
+	       catch  (HibernateException e) {
+	    	   e.printStackTrace();
+	        }
+	        return cl;
+	    }
 	 public HoaDon getHoaDon(int id) {
 		 HoaDon cl = null;
 	       try
@@ -96,5 +143,20 @@ public class HoaDonDAO {
 	        //session.close();
 	    }
 	 
-	
+	public static void main(String[] args) {
+		 List<HoaDon>lst1=null;
+		    try
+		    {
+		    	lst1= new HoaDonDAO().getOnDayHoaDon("2018-1-3");
+		    }
+		    catch (Exception e1)
+		    {}
+		    
+		    int SHD = 0;
+		    if(lst1!=null)
+		    {
+		    	SHD = lst1.size();
+		    }
+		    System.out.println(SHD);
+	}
 }

@@ -20,7 +20,7 @@ import model.ChiTietPhieuNhap;
 
 public class ChiTietPhieuNhapDAO {
 	 @SuppressWarnings("unchecked")
-	public  List<ChiTietPhieuNhap> getAllChiTietPhieuNhap(){
+	public  List<ChiTietPhieuNhap> getAllChiTietPhieuNhap(int id){
 		 List<ChiTietPhieuNhap> list=null;
 	        try
 	        {
@@ -30,7 +30,7 @@ public class ChiTietPhieuNhapDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from ChiTietPhieuNhap";
+		        String hql ="from ChiTietPhieuNhap where MA_PN="+id;
 		        Query que = session.createQuery(hql);
 		        list = que.list();
 		        transaction.commit();
@@ -100,5 +100,9 @@ public class ChiTietPhieuNhapDAO {
 	        //session.close();
 	    }
 	 
-	
+	public static void main(String[] args) {
+		ChiTietPhieuNhap ct = new ChiTietPhieuNhap(5, 1, 130000,2, 1);
+		ChiTietPhieuNhapDAO ctdao = new ChiTietPhieuNhapDAO();
+		ctdao.insertChiTietPhieuNhap(ct);
+	}
 }

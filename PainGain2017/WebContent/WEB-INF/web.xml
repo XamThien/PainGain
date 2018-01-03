@@ -49,7 +49,38 @@
     <servlet-name>ActionCalam</servlet-name>
     <url-pattern>/actioncalam</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>ActionDanhmuc</servlet-name>
+    <servlet-class>controller.ActionDanhmuc</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActionDanhmuc</servlet-name>
+    <url-pattern>/actiondanhmuc</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActionLoaisp</servlet-name>
+    <servlet-class>controller.ActionLoaisp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActionLoaisp</servlet-name>
+    <url-pattern>/actionloaisp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SuggestSanPham</servlet-name>
+    <servlet-class>controller.donhang.SuggestSanPham</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SuggestSanPham</servlet-name>
+    <url-pattern>/donhang/search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ThemChiTietDonHang</servlet-name>
+    <servlet-class>controller.donhang.ThemChiTietDonHang</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThemChiTietDonHang</servlet-name>
+    <url-pattern>/donhang/add</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>loginFilter</filter-name>
     <filter-class>paingainshop.filter.loginFilter</filter-class>
@@ -63,5 +94,11 @@
     <url-pattern>/nhacc.jsp</url-pattern>
     <url-pattern>/thuongphat.jsp</url-pattern>
     <url-pattern>/calam.jsp</url-pattern>
+    <url-pattern>/tinhluong.jsp</url-pattern>
+    <url-pattern>/DanhMucSP.jsp</url-pattern>
+    <url-pattern>/LoaiSP.jsp</url-pattern>
+    <url-pattern>/hoadon.jsp</url-pattern>
+    <url-pattern>/chitiethoadon.jsp</url-pattern>
+    <url-pattern>/addNewSP.jsp</url-pattern>
   </filter-mapping>
 </web-app>

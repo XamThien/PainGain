@@ -54,20 +54,31 @@ public class AddChamcong extends HttpServlet {
         
         try
         {
-        	ChamCongDAO db = new ChamCongDAO();
-        	ChamCong cc = db.getChamCong(ma_nv,datestr,ma_ca);
-        	if (cc==null)
+        	try
         	{
-        		ChamCong ccn = new ChamCong(ma_nv,giobd,giokt,datestr,ma_ca);
-        		db.insertChamCong(ccn);
-        		message = "Chấm công thành công.";
-    			RequestDispatcher xxx = request.getRequestDispatcher("chamcong.jsp");
-    			request.setAttribute("msg", message );
-    			xxx.forward(request, response);
+        		ChamCongDAO db = new ChamCongDAO();
+            	ChamCong cc = db.getChamCong(ma_nv,datestr,ma_ca);
+            	if (cc==null)
+            	{
+            		ChamCong ccn = new ChamCong(ma_nv,giobd,giokt,datestr,ma_ca);
+            		db.insertChamCong(ccn);
+            		message = "Chấm công thành công.";
+        			RequestDispatcher xxx = request.getRequestDispatcher("chamcong.jsp");
+        			request.setAttribute("msg", message );
+        			xxx.forward(request, response);
+            	}
+            	else
+            	{
+            		message = "Bạn đã chấm công hôm nay.";
+        			RequestDispatcher xxx = request.getRequestDispatcher("chamcong.jsp");
+        			request.setAttribute("msg", message );
+        			xxx.forward(request, response);
+            	}
         	}
-        	else
+        	catch (Exception y)
         	{
-        		message = "Bạn đã chấm công hôm nay.";
+        		System.out.println(y);
+            	message = "Không thành công.";
     			RequestDispatcher xxx = request.getRequestDispatcher("chamcong.jsp");
     			request.setAttribute("msg", message );
     			xxx.forward(request, response);
@@ -75,6 +86,7 @@ public class AddChamcong extends HttpServlet {
         }
         catch (Exception x)
         {
+        	System.out.println(x);
         	message = "Không thành công.";
 			RequestDispatcher xxx = request.getRequestDispatcher("chamcong.jsp");
 			request.setAttribute("msg", message );

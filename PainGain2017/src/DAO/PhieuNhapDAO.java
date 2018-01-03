@@ -30,7 +30,7 @@ public class PhieuNhapDAO {
 	        	
 	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		        Transaction transaction = session.beginTransaction();
-		        String hql ="from PhieuNhap";
+		        String hql ="from PhieuNhap order by MA_PN DESC";
 		        Query que = session.createQuery(hql);
 		        list = que.list();
 		        transaction.commit();
@@ -40,6 +40,7 @@ public class PhieuNhapDAO {
 	        }
 	        return list;
 	}
+	 //order by MaNV DESC Limit 1
 	 public PhieuNhap getPhieuNhap(int id) {
 		 PhieuNhap cl = null;
 	       try
@@ -61,7 +62,30 @@ public class PhieuNhapDAO {
 	        }
 	        return cl;
 	    }
-	 public void insertNhanVien(PhieuNhap sp){
+	 public PhieuNhap getLastPhieuNhap() {
+		 PhieuNhap cl = null;
+		 List<PhieuNhap> list=null;
+	       try
+	       {
+	    	    Configuration configuration =  new Configuration().configure();
+	        	SessionFactory sessionFactory = configuration.buildSessionFactory();
+	        	Session session = sessionFactory.openSession();
+	        	
+	        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		        Transaction transaction = session.beginTransaction();
+		        String hql ="from PhieuNhap order by MA_PN DESC" ;
+		        Query que = session.createQuery(hql);
+		        list = que.list();
+		        cl = (PhieuNhap) list.get(0);
+		        transaction.commit();
+		        //session.close();
+	       }
+	       catch  (HibernateException e) {
+	    	   e.printStackTrace();
+	        }
+	        return cl;
+	    }
+	 public void insertPhieuNhap(PhieuNhap sp){
 		 	Configuration configuration =  new Configuration().configure();
 		 	SessionFactory sessionFactory = configuration.buildSessionFactory();
 		 	Session session = sessionFactory.openSession();
@@ -96,6 +120,9 @@ public class PhieuNhapDAO {
 	        transaction.commit();
 	        //session.close();
 	    }
-	 
+	 public static void main(String[] args) {
+		PhieuNhap pn = new PhieuNhapDAO().getLastPhieuNhap();
+		System.out.println(pn.getMaPn());
+	}
 	
 }

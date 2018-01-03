@@ -21,6 +21,7 @@ public class ChiTietHoaDon implements java.io.Serializable {
 	private int soLuong;
 	private Integer giamGia;
 	private Boolean laPhanTram;
+	private int donGia;
 
 	public ChiTietHoaDon() {
 	}
@@ -29,10 +30,11 @@ public class ChiTietHoaDon implements java.io.Serializable {
 		this.soLuong = soLuong;
 	}
 
-	public ChiTietHoaDon(Integer maHd, Integer maSp, int soLuong, Integer giamGia, Boolean laPhanTram) {
+	public ChiTietHoaDon(Integer maHd, Integer maSp, int soLuong,int donGia, Integer giamGia, Boolean laPhanTram) {
 		this.maHd = maHd;
 		this.maSp = maSp;
 		this.soLuong = soLuong;
+		this.donGia = donGia;
 		this.giamGia = giamGia;
 		this.laPhanTram = laPhanTram;
 	}
@@ -93,5 +95,14 @@ public class ChiTietHoaDon implements java.io.Serializable {
 	public void setLaPhanTram(Boolean laPhanTram) {
 		this.laPhanTram = laPhanTram;
 	}
+	@Column(name = "DON_GIA")
+	public int getDonGia() {
+		return donGia;
+	}
 
+	public void setDonGia(int donGia) {
+		this.donGia = donGia;
+	}
+	
+	
 }

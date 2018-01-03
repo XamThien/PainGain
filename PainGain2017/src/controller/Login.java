@@ -6,6 +6,9 @@
 package controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,30 +50,62 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String username = request.getParameter("username");
-       String password = request.getParameter("password");
-       AccountDAO nvacess = new AccountDAO();
-       Account nv;
-        try {
-            nv = nvacess.getAccountByName(username);
-            if(nv == null){
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-             }else{
-               if (nv.getPass().equals(password))
-               {
-            	   HttpSession session = request.getSession();
-                   session.setAttribute("login", nv);
-                   response.sendRedirect("home.jsp");
-               }
-               else 
-               {
-            	   request.getRequestDispatcher("login.jsp").forward(request, response);
-               }
+    	Date dNow = new Date( );
+    	SimpleDateFormat hourft = new SimpleDateFormat ("HH");
+        int curhour =  Integer.parseInt(hourft.format(dNow));
+    	
+     // chi co tk Admin hoat dong 24/24, tk nhan vien chi hoat dong tu 8h-21h
+        
+       
+    	   String username = request.getParameter("username");
+           String password = request.getParameter("password");
+           AccountDAO nvacess = new AccountDAO();
+           Account nv;
+           // tinh thoi gian bat dau cham cong
+           
+           SimpleDateFormat curtimefm = new SimpleDateFormat ("HH:mm:ss");
+           String curtime =  curtimefm.format(dNow);
+           
+            try {
+                nv = nvacess.getAccountByName(username);
+                if(nv == null){
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                 }else{
+                   if (nv.getPass().equals(password))
+                   {
+                	   if (nv.getUserName().equals("admin"))
+                	   {
+                		   HttpSession session = request.getSession();
+                           session.setAttribute("login", nv);
+                           session.setAttribute("curtime", curtime);
+                           response.sendRedirect("home.jsp");
+                	   }
+                	   else
+                	   {
+                		   if(curhour < 8 || curhour > 21)
+                	       {
+                	    	   response.sendRedirect("login.jsp");
+                	       }
+                	       else 
+                	       {
+                	    	   HttpSession session = request.getSession();
+                               session.setAttribute("login", nv);
+                               session.setAttribute("curtime", curtime);
+                               response.sendRedirect("home.jsp");
+                	       }
+                	       
+                	   }
+                   }
+                   else 
+                   {
+                	   request.getRequestDispatcher("login.jsp").forward(request, response);
+                   }
+                }
+            } catch (Exception ex) {
+                //request.getRequestDispatcher("login.jsp").forward(request, response);
+                response.getWriter().print(ex.getMessage());
             }
-        } catch (Exception ex) {
-            //request.getRequestDispatcher("login.jsp").forward(request, response);
-            response.getWriter().print(ex.getMessage());
-        }
+       
        
     }
 

@@ -28,3 +28,50 @@ textarea.form-control{
 .delproc{
 	font-size: 24px;
 }
+.formtl{
+	
+	width:332px;
+	height:25px;
+	float:right;
+	background-color: #ecf0f5;
+}
+.breadcrumb{
+background-color: #ecf0f5;
+}
+.ulstyle{
+	
+}
+.ulstyle li{
+	list-style-type: none;
+	display: inline-block;
+}
+.tpAdd{
+	margin-left:35px;
+}
+.col-lg-3{
+	width: 33%;
+}
+input.rounded {
+	border: 1px solid #ccc;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-moz-box-shadow: 2px 2px 3px #666;
+	-webkit-box-shadow: 2px 2px 3px #666;
+	box-shadow: 2px 2px 3px #666;
+	
+	outline: 0;
+	-webkit-appearance: none;
+}
+input.rounded:focus {
+	border-color: #339933;
+}
+.formtlx ul {
+	float:right;
+    margin-top: -23px;
+    margin-bottom: 10px;
+}
+.homeulstyle li{
+	list-style-type: none;
+	display: inline-block;
+}

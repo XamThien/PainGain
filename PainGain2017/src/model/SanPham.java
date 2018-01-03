@@ -19,7 +19,7 @@ public class SanPham implements java.io.Serializable {
 	private String tenSp;
 	private int soLuong;
 	private int donGiaBan;
-	private Integer donGiaMua;
+	private Integer donGiaNhap;
 	private Integer maLoai;
 
 	public SanPham() {
@@ -31,11 +31,11 @@ public class SanPham implements java.io.Serializable {
 		this.donGiaBan = donGiaBan;
 	}
 
-	public SanPham(String tenSp, int soLuong, int donGiaBan, Integer donGiaMua, Integer maLoai) {
+	public SanPham(String tenSp, int soLuong, int donGiaBan, Integer donGiaNhap, Integer maLoai) {
 		this.tenSp = tenSp;
 		this.soLuong = soLuong;
 		this.donGiaBan = donGiaBan;
-		this.donGiaMua = donGiaMua;
+		this.donGiaNhap = donGiaNhap;
 		this.maLoai = maLoai;
 	}
 
@@ -78,13 +78,13 @@ public class SanPham implements java.io.Serializable {
 		this.donGiaBan = donGiaBan;
 	}
 
-	@Column(name = "DON_GIA_MUA")
+	@Column(name = "DON_GIA_NHAP")
 	public Integer getDonGiaMua() {
-		return this.donGiaMua;
+		return this.donGiaNhap;
 	}
 
-	public void setDonGiaMua(Integer donGiaMua) {
-		this.donGiaMua = donGiaMua;
+	public void setDonGiaMua(Integer donGiaNhap) {
+		this.donGiaNhap = donGiaNhap;
 	}
 
 	@Column(name = "MA_LOAI")

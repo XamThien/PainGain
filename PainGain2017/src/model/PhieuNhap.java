@@ -27,6 +27,10 @@ public class PhieuNhap implements java.io.Serializable {
 	public PhieuNhap(String ngayLap) {
 		this.ngayLap = ngayLap;
 	}
+	public PhieuNhap(Integer maPn,String ngayLap) {
+		this.maPn= maPn;
+		this.ngayLap = ngayLap;
+	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
