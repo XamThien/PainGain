@@ -64,7 +64,7 @@
                     <td><%=ac.getUserName() %></td>
                     <td><%=ac.getPass() %></td>
                     <td>
-                      <button class="btn btn-link" data-toggle="modal" data-target="#modal-editemployee" onclick = "edit('<%=nvx.getMaNv() %>','<%=nvx.getTenNv() %>','<%=nvx.getDiaChi() %>','<%=ac.getUserName() %>','<%=ac.getPass() %>');"><span class="fa fa-edit">Sửa</span></button>
+                      <button class="btn btn-link" data-toggle="modal" data-target="#modal-editemployee" onclick = "edit('<%=nvx.getMaNv() %>','<%=nvx.getTenNv() %>','<%=nvx.getDiaChi() %>','<%=ac.getUserName() %>','<%=ac.getPass() %>',<%=ac.getTrangThai()%>);"><span class="fa fa-edit">Sửa</span></button>
                       <span class="fa" style="margin: 0px 5px;"></span>
                       <a onclick="return confirmAction()" href="${pageContext.request.contextPath}/actionnhanvien?MaNV=<%=nvx.getMaNv() %>"><span class="fa fa-remove">Xóa</span></a>
                     </td>
@@ -204,6 +204,16 @@
                     <input type="text" class="form-control" id="inputText15" placeholder="Địa chỉ" name="Diachi">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="inputText3" class="col-sm-2 control-label">Trạng thái hoạt động</label>
+                  <div class="col-sm-10">
+                  	<select class="form-control" id="inputTextxx"  name="trangthai" >
+						<option value="0">Nghỉ</option>
+						<option value="1">Còn làm việc</option>
+					</select>
+                    
+                  </div>
+                </div>
                   
                 </div>
                   
@@ -227,7 +237,7 @@
     <!-- =============================================================================== -->
   
   <script type="text/javascript">
-    function edit(ma,ten,diachi,username,pass) {
+    function edit(ma,ten,diachi,username,pass,tt) {
 
     	
         
@@ -236,9 +246,15 @@
         document.getElementById("inputText12").value = username;
         document.getElementById("inputText13").value = pass;
         document.getElementById("inputText15").value = diachi;
-       
         
-       
+        for(var i=0; i < document.getElementById("inputTextxx").options.length; i++)
+        {
+          if(document.getElementById("inputTextxx").options[i].value === tt) {
+        	  document.getElementById("inputTextxx").selectedIndex = i;
+            break;
+          }
+        }
+        
         
     };
     

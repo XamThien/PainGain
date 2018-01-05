@@ -80,13 +80,14 @@ public class ActionNhanVien extends HttpServlet {
 				String pass = request.getParameter("Password");
 				
 				String dc = request.getParameter("Diachi");
+				int tt = Integer.parseInt(request.getParameter("trangthai"));
 				//String ngayvl = request.getParameter("Date");
 				
 	            NhanVien nvo = new  NhanVienDAO().getNhanVienByID(idd);
 	            
 	            NhanVien nv = new NhanVien(name,nvo.getGioiTinh(),dc,nvo.getNgayVaoLam());
 	            
-	            Account acc = new Account(idd,username,pass);
+	            Account acc = new Account(idd,username,pass,tt);
 	            try
 	            {
 	            	db.updateNhanVien(idd, nv);
@@ -131,7 +132,7 @@ public class ActionNhanVien extends HttpServlet {
 	            NhanVien nv = new NhanVien(name,sex,dc,ngayvl);
 	            List<NhanVien> lst =  db.getAllNhanVien();
 	            int stt = lst.size();
-	            Account acc = new Account(stt+1,username,pass);
+	            Account acc = new Account(stt+1,username,pass,1);
 	            //kiem tra ten dang nhap da ton tai chua
 	            Account check = db1.getAccountByName(username);
 	            try

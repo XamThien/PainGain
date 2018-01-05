@@ -160,7 +160,7 @@
         			<div class="form-group">
                   <label for="inputText2" class="col-sm-2 control-label">Ca</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control"  id="inputText131"  name="ID" >
+                    <input type="text" class="form-control"  id="inputText131"  name="ID" disabled>
                   </div>
                 </div>
                  <div class="form-group">

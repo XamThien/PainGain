@@ -82,17 +82,24 @@ public class Login extends HttpServlet {
                 	   }
                 	   else
                 	   {
-                		   if(curhour < 8 || curhour > 21)
-                	       {
-                	    	   response.sendRedirect("login.jsp");
-                	       }
-                	       else 
-                	       {
-                	    	   HttpSession session = request.getSession();
-                               session.setAttribute("login", nv);
-                               session.setAttribute("curtime", curtime);
-                               response.sendRedirect("home.jsp");
-                	       }
+                		   if(nv.getTrangThai()==1)
+                		   {
+                			   if(curhour < 8 || curhour > 21)
+                    	       {
+                    	    	   response.sendRedirect("login.jsp");
+                    	       }
+                    	       else 
+                    	       {
+                    	    	   HttpSession session = request.getSession();
+                                   session.setAttribute("login", nv);
+                                   session.setAttribute("curtime", curtime);
+                                   response.sendRedirect("home.jsp");
+                    	       }
+                		   }
+                		   else
+                		   {
+                			   response.sendRedirect("login.jsp");
+                		   }
                 	       
                 	   }
                    }

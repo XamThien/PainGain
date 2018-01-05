@@ -112,6 +112,7 @@ public class AccountDAO {
 	        Account spp = (Account)session.load(Account.class, id);
 	        spp.setUserName(sp.getUserName());
 	        spp.setPass(sp.getPass());
+	        spp.setTrangThai(sp.getTrangThai());
 	        
 	        
 	        session.update(spp);

@@ -16,6 +16,7 @@ public class Account implements java.io.Serializable {
 	private int maAc;
 	private String userName;
 	private String pass;
+	private int trangThai;
 
 	public Account() {
 	}
@@ -24,10 +25,11 @@ public class Account implements java.io.Serializable {
 		this.maAc = maAc;
 	}
 
-	public Account(int maAc, String userName, String pass) {
+	public Account(int maAc, String userName, String pass, int trangThai) {
 		this.maAc = maAc;
 		this.userName = userName;
 		this.pass = pass;
+		this.trangThai= trangThai;
 	}
 
 	@Id
@@ -58,5 +60,15 @@ public class Account implements java.io.Serializable {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+	
+	@Column(name = "TRANG_THAI")
+	public int getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(int trangThai) {
+		this.trangThai = trangThai;
+	}
+	
 
 }
