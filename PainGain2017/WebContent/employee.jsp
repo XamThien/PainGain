@@ -44,6 +44,7 @@
                   <th>Ngày vào làm</th>
                   <th>Tên đăng nhập</th>
                   <th>Mật khẩu</th>
+                  
                   <th><button class="btn btn-link" id="btnaddemployee" data-toggle="modal" data-target="#addemployee"><span class="fa fa-plus">Thêm mới</span></button></th>
                 </tr>
                 </thead>
@@ -55,14 +56,20 @@
                 		for (NhanVien nvx : list)
                 		{
                 			Account ac = new AccountDAO().getAccountByID(nvx.getMaNv());
+                			if(ac.getTrangThai()==0)
+                			{
+                				continue;
+                			}
                 %>
                 <tr>
-                    <td><a href="#" title="click vào để xem chi tiết"><%=nvx.getMaNv() %></a></td>
-                    <td><%=nvx.getTenNv() %></td>
+                	<td><%=nvx.getMaNv() %></td>
+                    <td><a href="#" title="click vào để xem chi tiết"><%=nvx.getTenNv() %></a></td>
+                    
                     <td><%=nvx.getDiaChi() %></td>
                     <td><%=nvx.getNgayVaoLam() %></td>
                     <td><%=ac.getUserName() %></td>
                     <td><%=ac.getPass() %></td>
+                    
                     <td>
                       <button class="btn btn-link" data-toggle="modal" data-target="#modal-editemployee" onclick = "edit('<%=nvx.getMaNv() %>','<%=nvx.getTenNv() %>','<%=nvx.getDiaChi() %>','<%=ac.getUserName() %>','<%=ac.getPass() %>',<%=ac.getTrangThai()%>);"><span class="fa fa-edit">Sửa</span></button>
                       <span class="fa" style="margin: 0px 5px;"></span>
@@ -84,6 +91,7 @@
                   <th>Ngày vào làm</th>
                   <th>Tên đăng nhập</th>
                   <th>Mật khẩu</th>
+                  
                   <th>Action</th>
                 </tr>
                 </tfoot>
