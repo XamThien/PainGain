@@ -22,8 +22,12 @@
     
     SimpleDateFormat fttt = new SimpleDateFormat ("yyyy");
     Date dNow = new Date( );
-    int curyear =  Integer.parseInt(fttt.format(dNow));
-    
+    int curyear =  Integer.parseInt(fttt.format(dNow)); // để lấy năm hiện tại, dùng cho thẻ combobox cho form nhập thời gian truy vấn
+    /* 
+    *  khoi tao mot bien thoi gian là date
+    *  neu date co gia trị truy van, tuc la trang nay dc goi lại voi mot tham so thoi gian
+    *  neu date = null tuc la trang nay mo ra binh thuong, khong co tham so truyen
+    */
     String date;
     if(month!=null && year!=null)
     {
@@ -32,18 +36,18 @@
     else
     {
     	
-        SimpleDateFormat ft = new SimpleDateFormat ("MM");
+        SimpleDateFormat ft = new SimpleDateFormat ("MM"); // nếu month =null, lay ra thang hien tai de hien thị ten bảng
         month =  ft.format(dNow);
         
-        SimpleDateFormat ftt = new SimpleDateFormat ("yyyy-MM-dd");
-        date =  ftt.format(dNow);
-        
-        SimpleDateFormat ftyear = new SimpleDateFormat ("yyyy");
+        SimpleDateFormat ftyear = new SimpleDateFormat ("yyyy"); // nếu year=null,  lay ra năm hien tai de hien thị ten bảng
         year =  ftyear.format(dNow);
+        
+        SimpleDateFormat ftt = new SimpleDateFormat ("yyyy-MM-dd"); // lấy thời gian hiện tại
+        date =  ftt.format(dNow);
         
     }
     %>
-		
+		<!-- form nay co chuc nang: lay thoi gian ma nguoi dung nhap vao de xuat ra bang tinh luong thang do -->
 		<form class="formtl" action="tinhluong.jsp" method="get">
 				<ul class="ulstyle" >
 					<li><a href="#"><i class="fa fa-dashboard"></i>Tháng: </a></li>
@@ -102,7 +106,7 @@
 	int b[]=new int[soca+1]; // so ca
 	int c[]=new int[soca+1]; // so gio moi ca
 	int i= 0;
-	
+		// đọc ghi mã ca và lương  giờ vào hai mảng có chỉ số tương ứng.
 		for (CaLam cl : lstcl)
 		{
 			a[i]=cl.getLuongGio();
@@ -133,6 +137,7 @@
 	                </thead>
 	                <tbody>
 	                <%
+	                // lấy danh sách nhân viên
 	                List<NhanVien> lstnv = new NhanVienDAO().getAllNhanVien();
 	                for (NhanVien nv :lstnv)
 	                {
@@ -154,6 +159,8 @@
 			                  		%>	
 			                  </td>
 			                  	<%
+			                  	// lấy danh sách bản ghi chấm công của nhân viên theo tháng-năm 
+			                  	// để tính số giờ làm việc của nhân viên đó , ghi ra mảng c[]
 			                  	List<ChamCong> lstcc = new ChamCongDAO().getAllChamCong(nv.getMaNv(),date);
 			                  	for(i=0;i<soca;i++)
 			                  	{
@@ -195,6 +202,8 @@
 			                  		%>	
 			                  </td>
 			                  <%
+			                  // lay danh sach bản ghi thưởng phạt của nhân viên,
+			                  // cộng tổng thưởng ghi ra biến thuong và phạt ghi ra biến phat
 			                  List<ThuongPhat> lsttp = new ThuongPhatDAO().getAllThuongPhat(nv.getMaNv(), date);
 			                  for (ThuongPhat tp : lsttp)
 			                  {
@@ -214,11 +223,11 @@
 			                  int luong = 0;
 			                  for(i=0;i<soca;i++)
 			                  {
-			                	  luong+= a[i]*c[i];
+			                	  luong+= a[i]*c[i]; // lương giờ * số giờ
 			                  }
-			                  luong+=thuong-phat;
+			                  luong+=thuong-phat;   
 			                  
-			                  luong=luong/1000;
+			                  luong=luong/1000;     // đoạn này để hiển thị lương cho đẹp :))
 			                  int nluong= luong/1000;
 			                  %>
 			                  <td><br/><%=(nluong>0 || nluong<0) ? (nluong<0 ? nluong+"."+(-luong%1000) : nluong+"."+luong%1000) :luong %>.000 VNĐ<br/></td>
