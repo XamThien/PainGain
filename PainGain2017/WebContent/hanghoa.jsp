@@ -61,8 +61,8 @@
                     <td><%=sp.getMaSp() %></td>
                     <td><%=sp.getTenSp() %></td>
                     <td><%=sp.getSoLuong() %></td>
-                    <td><%=sp.getDonGiaMua() %></td>
-                    <td><%=sp.getDonGiaBan()%></td>
+                    <td><%=sp.getDonGiaBan() %></td>
+                    <td><%=sp.getDonGiaMua()%></td>
                     <td><%=lsp.getTenLoai() %></td>
                     <td>
                       <button class="btn btn-link" data-toggle="modal" data-target="#modal-editemployee" onclick = "edit(<%=sp.getMaSp() %>,'<%=sp.getTenSp() %>',<%=sp.getSoLuong() %>,<%=sp.getDonGiaBan() %>,<%=sp.getDonGiaMua() %>,<%=sp.getMaLoai() %>);"><span class="fa fa-edit">Sửa</span></button>
